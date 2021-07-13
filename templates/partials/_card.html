@@ -1,0 +1,45 @@
+{% load static %}
+
+{% if c.gender == 'Male' %}
+
+<div class="card shadow m-2 c-card boy">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="
+        {% if c.image %}
+        {{c.image.url}}
+        {% else %}
+        {% static 'images/male_user.png' %}
+        {% endif %}" class="card-image rounded-start my-2" alt="Unable to load image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{c.name}}</h5>
+          <p class="card-text">{{c.designation}}</p>
+          <a class="btn btn-primary shadow" href="{% url 'detail_view' c.id %}">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="card shadow m-2 c-card girl">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="
+        {% if c.image %}
+        {{c.image.url}}
+        {% else %}
+        {% static 'images/female_user.png' %}
+        {% endif %}" class="card-image rounded-start my-2" alt="Unable to load image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{c.name}}</h5>
+          <p class="card-text">{{c.designation}}</p>
+          <a class="btn g-button text-light shadow" href="{% url 'detail_view' c.id %}">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}

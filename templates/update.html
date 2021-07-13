@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if contact.manager == request.user %}
+Update {{contactt}}<!--lowercase model-->
+{% else %}
+No Record Found
+{% endif %}
+{% endblock title %}
+
+
+{% block content %}
+
+{% if contact.manager == request.user %}
+
+<div class="container-fluid create-div">
+    <br>
+   <div class="container col-md-4 bg-light shadow pt-4">
+       <h3 class="fw-light text-center">Create New Contact</h3>
+       <hr>
+   </div> 
+
+   <div class="container col-sm-4 card p-4 mt-4 card-form shadow">
+       <p class="fw-light">Fields marked with '*' are mandatory</p>
+
+    <form method="POST" action="" class="form-inline" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form|crispy}}
+
+    <input type="submit" value="Update" class="btn btn-warning shadow w-100 mb-3">
+    <a class="btn btn-secondary w-100 shadow py-2" href="{% url 'detail_view' contact.id %}">Cancel</a>
+    </form>
+
+   </div>
+<br>
+</div>
+{% else %}
+
+<div class="container my-4 text-center">
+    <h1 class="fw-light">No Record Found</h1>
+</div>
+
+{% endif %}
+
+
+
+
+
+{% endblock %}

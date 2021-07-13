@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{% if c.manager == request.user %}
+detail of {{c.name}}
+{% else %}
+No records found!
+{% endif %}
+{% endblock title %}
+
+
+{% block content %}
+
+{% if c.manager == request.user %}
+<div class="container d-cont pb-5">
+    <h3 class="fw-light">{{c.name}}</h3>
+    <hr>
+    {% if c.gender == 'Male' %}
+<div class="row justify-content-center">
+    <div class="col-sm-4 p-0 d-flex justify-content-center">
+        <img src="{% if c.image %}
+        {{c.image.url}}
+        {% else %}
+        {% static './images/male_user.png' %}
+        {% endif %}
+        "class="detail-image shadow" alt="Error Loading Image">
+
+    </div>
+    <div class="col-sm-6 d-card">
+<h4 class="fw-light">Name : {{c.name}}</h4>
+<h5 class="fw-light">Email : {{c.email}}</h5>
+<h5 class="fw-light">Phone : {{c.phone}}</h5>
+<h5 class="fw-light">Designation : {{c.designation}}</h5>
+<h5 class="fw-light">Info : {{c.info|linebreaks}}</h5>
+<h5 class="fw-light">Gender : {{c.gender}}</h5>
+<h5 class="fw-light">Entry Date : {{c.date_added}}</h5>
+<br><br>
+<div class="cotainer d-flex justify-content-center d-btn">
+    <a href="{% url 'delete_view' c.id %}" class="btn btn-danger shadow m-2 w-100"><i class="fas fa-trash"></i> Delete</a>
+    <a href="{% url 'update_view' c.id %}" class="btn btn-warning shadow m-2 w-100"><i class="fas fa-edit"></i> Edit</a>
+</div>
+    </div>
+</div>
+
+{% else %}
+
+<div class="row justify-content-center">
+    <div class="col-sm-4 p-0">
+        <img src="{% if c.image %}
+        {{c.image.url}}
+        {% else %}
+        {% static './images/female_user.png' %}
+        {% endif %}
+        "class="detail-image shadow" alt="Error Loading Image">
+
+    </div>
+    <div class="col-sm-6 d-card">
+<h4 class="fw-light">Name : {{c.name}}</h4>
+<h5 class="fw-light">Email : {{c.email}}</h5>
+<h5 class="fw-light">Phone : {{c.phone}}</h5>
+<h5 class="fw-light">Designation : {{c.designation}}</h5>
+<h5 class="fw-light">Info : {{c.info|linebreaks}}</h5>
+<h5 class="fw-light">Gender : {{c.gender}}</h5>
+<h5 class="fw-light">Entry Date : {{c.date_added}}</h5>
+
+<br><br>
+<div class="cotainer d-flex justify-content-center d-btn">
+    <a href="{% url 'delete_view' c.id %}"  class="btn btn-danger shadow m-2 w-100"><i class="fas fa-trash"></i> Delete</a>
+    <a href="{% url 'update_view' c.id %}" class="btn btn-warning shadow m-2 w-100"><i class="fas fa-edit"></i> Edit</a>
+</div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+</div>
+{% else %}
+
+<div class="container text-center">
+    <h1 class="fw-light my-4">No Results Found !</h1>
+
+</div>
+{% endif %}
+
+
+{% endblock %}
